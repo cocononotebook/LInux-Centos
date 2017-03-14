@@ -1,2 +1,14 @@
-#add new repo file
-touch [file name] 
+# install google chrome
+cd /etc/yum.repos.d/
+touch google.repo
+vim google.repo
+#copy following command to .repo file
+[google-chrome]
+name=google-chrome - 64-bit
+baseurl=http://dl.google.com/linux/chrome/rpm/stable/x86_64
+enabled=1
+gpgcheck=0
+gpgkey=https://dl-ssl.google.com/linux/linux_signing_key.pub
+
+yum search google-chrome
+yum install google-chrome-stable
