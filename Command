@@ -26,3 +26,8 @@ export CLASSPATH=$CLASSPATH:.:$JAVA_HOME/lib:$JRE_HOME/l
 
 #solve yum lock
 rm -rf /var/run/yum.pid
+
+#install EPEL
+wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+rpm -ivh epel-release-latest-7.noarch.rpm 
+yum update
