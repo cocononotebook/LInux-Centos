@@ -23,3 +23,6 @@ export JAVA_HOME=/usr/java/jdk1.x.x.xx
 export JRE_HOME=/usr/java/jdk1.x.xx/jre
 export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH:$ANT_HOME/bin
 export CLASSPATH=$CLASSPATH:.:$JAVA_HOME/lib:$JRE_HOME/l
+
+#solve yum lock
+rm -rf /var/run/yum.pid
