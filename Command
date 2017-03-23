@@ -39,3 +39,12 @@ wget http://mirror.centos.org/centos/7/os/x86_64/Packages/texlive-epsf-svn21461.
 sudo yum localinstall texlive-epsf-svn21461.2.7.4-38.el7.noarch.rpm
 sudo yum install R
 
+##install RStudio
+  wget https://download2.rstudio.org/rstudio-server-rhel-1.0.136-x86_64.rpm
+  yum install --nogpgcheck rstudio-server-rhel-1.0.136-x86_64.rpm
+  #start Rstdui Server
+    groupadd rstudio
+    useradd rstudio -g rstudio
+    passwd hitachi
+    #open web browser and type "https://localhost:8787"
+    #enter the username&password you set.
