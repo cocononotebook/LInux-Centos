@@ -50,3 +50,7 @@ sudo yum install R
     #enter the username&password you set.
     #rstudio
     #hitachi
+    
+  ##Linux將WINDOW文件翻成中文
+  iconv -f BIG-5 -t UTF-8 第一次組間互評_第一組.csv >1.txt 
+  ##第一次組間互評_第一組.csv為輸入項，1.txt為創建輸出向。
