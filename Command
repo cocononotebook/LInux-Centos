@@ -46,5 +46,7 @@ sudo yum install R
     groupadd rstudio
     useradd rstudio -g rstudio
     passwd hitachi
-    #open web browser and type "https://localhost:8787"
+    #open web browser and type "localhost:8787"
     #enter the username&password you set.
+    #rstudio
+    #hitachi
