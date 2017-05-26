@@ -54,3 +54,21 @@ sudo yum install R
   ##Linux將WINDOW文件翻成中文
   iconv -f BIG-5 -t UTF-8 第一次組間互評_第一組.csv >1.txt 
   ##第一次組間互評_第一組.csv為輸入項，1.txt為創建輸出向。
+
+##Oracle 裝完oracle後
+    輸入dbca . 設定資料庫
+    亂碼話請輸入export LANG=en_US轉化英文
+  
+  控制台輸入lsnrctl start
+  輸入DBCA
+  database identifi
+    globalname:hitachi
+    SID會跟著輸
+  步驟4.點第一個方框跟圓框
+  步驟5.密碼hitachi
+  步驟6.選FileSystem,點第二個
+  步驟7.點1.2
+  步驟8.打勾
+  步驟9.characterset.選第2個-unicode AL32-UTF-8
+  步驟10.
+  
