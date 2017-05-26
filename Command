@@ -70,5 +70,14 @@ sudo yum install R
   步驟7.點1.2
   步驟8.打勾
   步驟9.characterset.選第2個-unicode AL32-UTF-8
-  步驟10.
+  步驟10.~~~
   
+ #遇到sqlplus問題.
+ Q1
+startup
+ORA-01078: failure in processing system parameters
+LRM-00109: could not open parameter file '/opt/oracle10g/product/10.2/db_1/dbs/init????.ora'
+ A1
+将$ORACLE_BASE/admin /数据库名称/pfile目录下的init.ora.012009233838形式的文件copy到$ORACLE_HOME/dbs目录下 
+init?????.ora即可。（注：init????.ora中的????为你的实例名 ORACLE_SID,可以透過錯誤提示時照樣命名）
+在startup即成功。
