@@ -1,0 +1,194 @@
+# Oracle 11g & R & Shiny
+
+# Downloaded Oracle 11g zip File & mkdir ora11gFile Folder by root.
+
+#cd dir to the file location & command "ll" check the files exist
+
+#start the oracle install now
+unzip linux.x64_11gR2_database_1of2.zip
+unzip linux.x64_11gR2_database_2of2.zip
+
+#ifconfig
+#NAT or not 192.168.122.1
+#NAT 10.0.2.15
+
+#edit the file "/etc/hosts" 
+sudo vim /etc/hosts
+
+#[IP adress] [machine-name.domain-name] [machine-name]
+192.168.122.1 ol7.localdomain ol7
+
+#Set the file ,path: /etc/hostname
+
+cd /
+cd etc
+vim hostname
+ol7.localdomain
+
+#install ol7.repo
+cd /etc /yum.repos
+wget http://yum.oracle.com/public-yum-ol7.repo
+
+#Choose "AutoSeutp"
+yum install oracle-rdbms-server-11gR2-preinstall
+yum update
+
+##Choose Manual Setup
+#Add lines in "/etc/sysctl.conf"
+
+#---
+fs.aio-max-nr = 1048576
+fs.file-max = 6815744
+kernel.shmall = 2097152
+kernel.shmmax = 536870912
+kernel.shmmni = 4096
+# semaphores: semmsl, semmns, semopm, semmni
+kernel.sem = 250 32000 100 128
+net.ipv4.ip_local_port_range = 9000 65500
+net.core.rmem_default=262144
+net.core.rmem_max=4194304
+net.core.wmem_default=262144
+net.core.wmem_max=1048586
+#---
+
+#Run the following command to change the current kernel parameters.
+/sbin/sysctl -p
+
+#Add the following lines to the "/etc/security/limits.conf" file.
+oracle              soft    nproc   2047
+oracle              hard    nproc   16384
+oracle              soft    nofile  4096
+oracle              hard    nofile  65536
+oracle              soft    stack   10240
+
+#Add the following line to the "/etc/pam.d/login" file, if it does not already exist.
+session    required     pam_limits.so
+
+#The following packages are listed as required, including the 32-bit version of some of the packages. Many of the packages should be installed already.
+
+yum install binutils -y
+yum install compat-libstdc++-33 -y
+yum install compat-libstdc++-33.i686 -y
+yum install gcc -y
+yum install gcc-c++ -y
+yum install glibc -y
+yum install glibc.i686 -y
+yum install glibc-devel -y
+yum install glibc-devel.i686 -y
+yum install ksh -y
+yum install libgcc -y
+yum install libgcc.i686 -y
+yum install libstdc++ -y
+yum install libstdc++.i686 -y
+yum install libstdc++-devel -y
+yum install libstdc++-devel.i686 -y
+yum install libaio -y
+yum install libaio.i686 -y
+yum install libaio-devel -y
+yum install libaio-devel.i686 -y
+yum install libXext -y
+yum install libXext.i686 -y
+yum install libXtst -y
+yum install libXtst.i686 -y
+yum install libX11 -y
+yum install libX11.i686 -y
+yum install libXau -y
+yum install libXau.i686 -y
+yum install libxcb -y
+yum install libxcb.i686 -y
+yum install libXi -y
+yum install libXi.i686 -y
+yum install make -y
+yum install sysstat -y
+yum install unixODBC -y
+yum install unixODBC-devel -y
+yum install zlib-devel -y
+yum install elfutils-libelf-devel -y
+
+#Create the new groups and users.
+groupadd -g 54321 oinstall
+groupadd -g 54322 dba
+groupadd -g 54323 oper
+groupadd -g 54324 backupdba
+groupadd -g 54325 dgdba
+groupadd -g 54326 kmdba
+groupadd -g 54327 asmdba
+groupadd -g 54328 asmoper
+groupadd -g 54329 asmadmin
+useradd -g oinstall -G dba,oper oracle
+
+
+#Set the password for Oracle
+passwd oracle
+
+#edit file from path etc/selinux/config
+sudo vim /etc/selinux/config
+
+SELINUX=permissive
+
+#restart server or following command
+setenforce Permissive
+
+#If Linux Firewall enable, plz disable or configure it
+systemctl stop firewalld
+systemctl disable firewalld
+
+#Create directory in which Oracle Software will be installed
+cd ~
+mkdir -p /u01/app/oracle/product/11.2.0.4/db_1
+chown -R oracle:oinstall /u01
+chmod -R 775 /u01
+#Login as root and issue the following command xhost + [machine-name]
+xhost +ol7
+
+#Add following lines at /home/oracle/.bash_profile
+cd ~
+su - oracle
+vi /home/oracle/.bash_profile
+
+# Oracle Settings
+TMP=/tmp; export TMP
+TMPDIR=$TMP; export TMPDIR
+
+ORACLE_HOSTNAME=ol7.localdomain; export ORACLE_HOSTNAME
+ORACLE_UNQNAME=DB11G; export ORACLE_UNQNAME
+ORACLE_BASE=/u01/app/oracle; export ORACLE_BASE
+ORACLE_HOME=$ORACLE_BASE/product/11.2.0.4/db_1; export ORACLE_HOME
+ORACLE_SID=DB11G; export ORACLE_SID
+ORACLE_TERM=xterm; export ORACLE_TERM
+PATH=/usr/sbin:$PATH; export PATH
+PATH=$ORACLE_HOME/bin:$PATH; export PATH
+
+LD_LIBRARY_PATH=$ORACLE_HOME/lib:/lib:/usr/lib; export LD_LIBRARY_PATH
+CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib; export CLASSPATH
+
+##after that.
+
+[root..] . ./.bash_profile
+
+#Installation
+DISPLAY=ol7:0.0; export DISPLAY
+cd / [database loaction]
+./runInstaller
+
+
+#INSTALL jdk
+#download jdk from oracle 
+rpm -ivh jdk-8u121-linux-x64.rpm
+rpm -Uvh jdk-8u121-linux-x64.rpm
+
+#set JAVA environment
+su
+vim /etc/profile
+export PATH=/usr/java/jdk1.8.0_121/bin:$PATH 
+export JAVA_HOME=/usr/java/jdk1.8.0_121 
+export CLASSPATH=.:/usr/java/jdk1.8.0_121
+
+echo $PATH => /usr/java/jdk1.8.0_121/bin
+echo $JAVA_HOME => /usr/java/jdk1.8.0_121
+export CLASSPATH=.:/usr/java/jdk1.8.0_121
+
+#echo for sure Path
+echo $PATH
+echo $JAVA_HOME
+echo $CLASSPATH
