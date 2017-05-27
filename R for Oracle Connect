@@ -12,3 +12,24 @@ ROracle
 export LD_LIBRARY_PATH=/usr/lib/oracle/11.2/client64/lib:$LD_LIBRARY_PATH
 $ R CMD INSTALL ROracle_1.3-1.tar.gz
 PATH得地方依據安裝OCI的位置而變動，ROracle版本則是是你安裝得版本去做更改，然後在檔案目錄直接執行以上程式碼，完成安裝。
+
+library("ROracle")
+#按照PDF得dbconnect()方法即可完成
+
+ROracle中文變亂碼
+原因是因為客戶端與伺服器NLS_LANG沒有一致，
+解決方法如下
+在linux cmd 介面輸入
+echo $NLS_LANG
+果如是空白,代表沒有設定
+
+現在登入sqlplus，輸入
+select userenv('language') from dual;
+得到語言
+AMERICAN_AMERICA.UTF8
+再退出到linux cmd輸入
+export NLS_LANG=AMERICAN_AMERICA.UTF8
+在確認是否有設定成功。
+echo $NLS_LANG
+
+參考網站http://techblog.forink.net/2013/11/oracle-sqlplus%E7%84%A1%E6%B3%95%E6%AD%A3%E5%B8%B8%E9%A1%AF%E7%A4%BA%E4%B8%AD%E6%96%87/
