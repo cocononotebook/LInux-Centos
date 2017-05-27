@@ -1,0 +1,9 @@
+#進入linux cmd,打開監聽器
+  lsnrctl start
+#以sysdba管理員進入sqlplus ，打開資料庫
+  sqlplus / as sysdba
+  startup
+#退出，就可以sqlplus system/派斯沃德04登入，也可以登入sql developer。
+ 
+#sql developer
+可以新建一資料庫
