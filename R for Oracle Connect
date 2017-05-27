@@ -7,3 +7,8 @@ ROracle
 安裝install.pckages("ROracle")遇到問題，OCI找不到，要去找
 安裝了http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
 錯誤訊息變了.從找不到library改成找不到header
+解決方法是.
+安裝OCI後，要再到ORACLE官網下載RORACLE，並使用以下語法
+export LD_LIBRARY_PATH=/usr/lib/oracle/11.2/client64/lib:$LD_LIBRARY_PATH
+$ R CMD INSTALL ROracle_1.3-1.tar.gz
+PATH得地方依據安裝OCI的位置而變動，ROracle版本則是是你安裝得版本去做更改，然後在檔案目錄直接執行以上程式碼，完成安裝。
