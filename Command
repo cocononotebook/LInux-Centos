@@ -91,3 +91,7 @@ ora-12504 SID錯誤 或 監聽器沒打開
 ora-12505 同上。
 lsnrctl status
 lsnrctl start
+
+#ORCLE知識
+SYS,SYSTEM 是使用者
+SYSDBA 是規則，亦是ADMIN的角色。
