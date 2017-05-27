@@ -51,4 +51,5 @@ con <- dbConnect(drv, username = "system", password = "Password04",dbname="local
 rs <- dbSendQuery(con, "select * from FCV1")
 data <- fetch(rs)
 data
+Sys.setenv(NLS_LANG="AMERICAN_AMERICA.UTF8")
 
