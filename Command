@@ -88,10 +88,12 @@ init?????.ora即可。（注：init????.ora中的????为你的实例名 ORACLE_S
  SID=DB11G
  
 ora-12504 SID錯誤 或 監聽器沒打開 
-ora-12505 同上。
+ora-12505 權限不足，透過SYSDBA將使用者得權限打開.本使用的是system,故
 lsnrctl status
 lsnrctl start
 
 #ORCLE知識
-SYS,SYSTEM 是使用者
+SYS,SYSTEM 是使用者規則，sys,system是使用者。
 SYSDBA 是規則，亦是ADMIN的角色。
+sqlplus / as sysdba #呼叫最大權限者
+sqlplus 帳號/密碼
