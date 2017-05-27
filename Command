@@ -87,6 +87,7 @@ init?????.ora即可。（注：init????.ora中的????为你的实例名 ORACLE_S
  HostName=預設
  SID=DB11G
  
-ora-12505 
+ora-12504 SID錯誤 或 監聽器沒打開 
+ora-12505 同上。
 lsnrctl status
 lsnrctl start
