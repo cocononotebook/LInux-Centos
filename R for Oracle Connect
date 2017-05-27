@@ -10,7 +10,7 @@ ROracle
 解決方法是.
 安裝OCI後，要再到ORACLE官網下載RORACLE，並使用以下語法
 export LD_LIBRARY_PATH=/usr/lib/oracle/11.2/client64/lib:$LD_LIBRARY_PATH
-$ R CMD INSTALL ROracle_1.3-1.tar.gz
+R CMD INSTALL ROracle_1.3-1.tar.gz
 PATH得地方依據安裝OCI的位置而變動，ROracle版本則是是你安裝得版本去做更改，然後在檔案目錄直接執行以上程式碼，完成安裝。
 
 library("ROracle")
