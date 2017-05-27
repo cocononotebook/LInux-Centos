@@ -42,3 +42,13 @@ R CMD INSTALL ROracle_1.3-1.tar.gz
 echo "/usr/lib/oracle/11.2/client64/lib" | sudo tee /etc/ld.so.conf.d/oracle.conf
 sudo ldconfig -v
 沒有任何錯誤，打開Rstudio可以正常執行。
+
+
+library("ROracle")
+drv <- dbDriver("Oracle")
+con <- dbConnect(drv, username = "system", password = "Password04",dbname="localhist:1521/orcl") 
+  #danmae="hostname:port/servicename"
+rs <- dbSendQuery(con, "select * from FCV1")
+data <- fetch(rs)
+data
+
