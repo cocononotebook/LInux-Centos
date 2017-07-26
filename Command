@@ -97,3 +97,6 @@ SYS,SYSTEM 是使用者規則，sys,system是使用者。
 SYSDBA 是規則，亦是ADMIN的角色。
 sqlplus / as sysdba #呼叫最大權限者
 sqlplus 帳號/密碼
+
+#scan csv file
+cat file.csv | sed -e 's/,,/, ,/g' | column -s, -t | less -#5 -N -S
