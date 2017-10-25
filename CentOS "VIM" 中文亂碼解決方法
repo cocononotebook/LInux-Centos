@@ -1,0 +1,16 @@
+去找vim的設定檔
+預設為etc下名為vimrc
+用su去編輯
+[root@linux ~]# vim vimrc
+假如遇到唯獨檔無法做竄改的問題
+請在終端機輸入
+chmod u=rwx vimrc
+
+#root身分可以做可讀、寫入、執行動作
+
+========將區塊內文字新增並 儲存========
+set fileencodings=utf8,big5,gbk,latin1
+set fileencoding=big5
+===================================
+
+完成
